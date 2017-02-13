@@ -1,8 +1,10 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import MainMap from './components/MainMap';
+import NewCat from './components/NewCat';
 
 const RouterComponent = () => {
   return (
@@ -12,7 +14,14 @@ const RouterComponent = () => {
         <Scene key="signup" component={SignupForm} title="Signup" />
       </Scene>
       <Scene key="main" initial>
-        <Scene key="map" component={MainMap} title="PocketCats" initial />
+        <Scene
+          key="map"
+          component={MainMap}
+          title="PocketCats"
+          onRight={() => Actions.new()}
+          rightTitle="+"
+          initial />
+        <Scene key="new" component={NewCat} title="Log Cat"  />
       </Scene>
     </Router>
   )
