@@ -12,4 +12,4 @@ let repository = new Realm({
       loggedAt: 'date'
     }
   }]
-})
+});
