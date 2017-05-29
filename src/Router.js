@@ -1,6 +1,7 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
 import { Actions } from 'react-native-router-flux';
+import TestPage from './components/TestPage';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import MainMap from './components/MainMap';
@@ -13,7 +14,10 @@ const RouterComponent = () => {
         <Scene key="login" component={LoginForm} title="Login" initial />
         <Scene key="signup" component={SignupForm} title="Signup" />
       </Scene>
-      <Scene key="main" initial>
+      <Scene key="test" initial>
+        <Scene key="testpage" component={TestPage} title="Login" initial />
+      </Scene>
+      <Scene key="main">
         <Scene
           key="map"
           component={MainMap}
