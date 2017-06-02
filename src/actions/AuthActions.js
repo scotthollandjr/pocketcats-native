@@ -29,8 +29,8 @@ export const conPasswordChanged = (text) => {
   return {
     type: CONPASSWORD_CHANGED,
     payload: text
-  }
-}
+  };
+};
 
 export const loginUser = ({ email, password }) => {
   return (dispatch) => {
@@ -55,8 +55,8 @@ export const signupUser = ({ email, password, conPassword }) => {
       let error = "Passwords do not match";
       displayError(dispatch, error)
     }
-  }
-}
+  };
+};
 
 const loginUserFail = (dispatch) => {
   dispatch({ type: LOGIN_USER_FAIL });

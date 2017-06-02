@@ -14,10 +14,10 @@ const RouterComponent = () => {
         <Scene key="login" component={LoginForm} title="Login" initial />
         <Scene key="signup" component={SignupForm} title="Signup" />
       </Scene>
-      <Scene key="test" initial>
+      <Scene key="test">
         <Scene key="testpage" component={TestPage} title="Login" initial />
       </Scene>
-      <Scene key="main">
+      <Scene key="main" initial>
         <Scene
           key="map"
           component={MainMap}

@@ -9,12 +9,17 @@ import {
   TouchableHighlight,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Image
-} from 'react-native';
+  Image } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 var {height, width} = Dimensions.get('window');
 import MapView, { Marker } from 'react-native-maps';
+import {
+  nameChanged,
+  typeChanged,
+  descriptionChanged,
+  ageChanged } from '../actions';
+import { Card, CardSection, Input, Button, Spinner } from './common';
 
 import CustomCallout from './CustomCallout';
 const ASPECT_RATIO = width / height;
@@ -23,7 +28,45 @@ const LONGITUDE = -122.683028;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
+import Realm from 'realm';
+
+let realm = new Realm({
+  schema: [{
+    name: 'Cat',
+    primaryKey: 'id',
+    properties: {
+      id:          { type: 'string', indexed: true },
+      name:        { type: 'string', indexed: true },
+      type:        { type: 'string', indexed: true },
+      location:    { type: 'string', indexed: true },
+      description: 'string',
+      age:         'int',
+      logged:      'date',
+      collar:      'bool',
+      gender:      'string',
+      user:        { type: 'string', indexed: true },
+      image:       'string'
+    }
+  }]
+});
+
 class NewCat extends Component {
+  onNameChange(text) {
+    this.props.nameChanged(text);
+  }
+
+  onTypeChange(text) {
+    this.props.typeChanged(text);
+  }
+
+  onDescriptionChange(text) {
+    this.props.descriptionChanged(text);
+  }
+
+  onAgeChange(text) {
+    this.props.ageChanged(text);
+  }
+
   // componentWillMount() {
   //   navigator.geolocation.getCurrentPosition(
   //     (position) => {
@@ -52,6 +95,24 @@ class NewCat extends Component {
     };
   }
 
+  createCat(cat) {
+    realm.write(() => {
+      realm.create('Cat', {
+        id:          cat.id,
+        name:        cat.name,
+        type:        cat.type,
+        location:    cat.location,
+        description: cat.description,
+        age:         cat.age,
+        logged:      cat.logged,
+        collar:      cat.collar,
+        gender:      cat.gender,
+        user:        cat.user,
+        image:       cat.image
+      });
+    });
+  }
+
   onMapPress() {
     return;
   }
@@ -68,9 +129,34 @@ class NewCat extends Component {
 
           </MapView>
           <View style={{flex:1}}>
-            <Text>
-              Sup
-            </Text>
+            <Card>
+              <CardSection>
+                <Input
+                  label="Name"
+                  placeholder="If known"
+                  onChangeText={this.onNameChange.bind(this)}
+                  value={this.props.name}
+                />
+                <Input
+                  label="Type"
+                  placeholder="Color or type"
+                  onChangeText={this.onTypeChange.bind(this)}
+                  value={this.props.type}
+                />
+                <Input
+                  label="Description"
+                  placeholder="A short note"
+                  onChangeText={this.onDescriptionChange.bind(this)}
+                  value={this.props.description}
+                />
+                <Input
+                  label="Age"
+                  placeholder="Estimation"
+                  onChangeText={this.onAgeChange.bind(this)}
+                  value={this.props.age}
+                />
+              </CardSection>
+            </Card>
           </View>
         </View>
       </View>
@@ -133,10 +219,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = ({ map }) => {
-  const { cat } = map;
+const mapStateToProps = ({ newCat }) => {
+  const { name, type, description, age } = newCat;
 
-  return { cat };
+  return { name, type, description, age };
 }
 
-export default connect(mapStateToProps, {})(NewCat);
+export default connect(mapStateToProps, {nameChanged, typeChanged, descriptionChanged, ageChanged})(NewCat);

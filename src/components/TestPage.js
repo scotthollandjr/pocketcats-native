@@ -7,20 +7,20 @@ import Realm from 'realm';
 class TestPage extends Component {
 
   render() {
-    let realm = new Realm({
-      schema: [{name: 'Cat', properties: {name: 'string'}}]
-    })
-
-    realm.write(() => {
-      realm.create('Cat', {name: 'Appa'});
-    });
+    // let realm = new Realm({
+    //   schema: [{name: 'Cat', properties: {name: 'string'}}]
+    // })
+    //
+    // realm.write(() => {
+    //   realm.create('Cat', {name: 'Appa'});
+    // });
 
     return (
       <View>
         <Card>
           <CardSection>
             <Text style={styles.text}>
-              Count of Cats in Realm: {realm.objects('Cat').length}
+              // Count of Cats in Realm: {realm.objects('Cat').length}
             </Text>
           </CardSection>
         </Card>
