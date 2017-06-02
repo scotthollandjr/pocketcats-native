@@ -20,6 +20,8 @@ import {
   descriptionChanged,
   ageChanged } from '../actions';
 import { Card, CardSection, Input, Button, Spinner } from './common';
+import Utils from '../Utils';
+import firebase from 'firebase';
 
 import CustomCallout from './CustomCallout';
 const ASPECT_RATIO = width / height;
@@ -95,22 +97,44 @@ class NewCat extends Component {
     };
   }
 
-  createCat(cat) {
+  createCat() {
+    const date = new Date();
+    const id = Utils.guid();
+
     realm.write(() => {
       realm.create('Cat', {
-        id:          cat.id,
-        name:        cat.name,
-        type:        cat.type,
-        location:    cat.location,
-        description: cat.description,
-        age:         cat.age,
-        logged:      cat.logged,
-        collar:      cat.collar,
-        gender:      cat.gender,
-        user:        cat.user,
-        image:       cat.image
+        id:          id,
+        name:        this.props.name,
+        type:        this.props.type,
+        location:    'null',
+        description: this.props.description,
+        age:         0,
+        logged:      date,
+        collar:      false,
+        gender:      'null',
+        user:        this.props.user.uid,
+        image:       'null'
       });
     });
+
+    let cats = realm.objects('Cat');
+    let catsArray = cats.map(x => Object.assign({}, x));
+    console.log("Cats: ", catsArray)
+  }
+
+  onButtonPress() {
+    const { name, type, description, age, user } = this.props;
+    const date = new Date();
+    const id = Utils.guid();
+
+    console.log(user.uid)
+    console.log("date ", date)
+    console.log("id", id)
+
+    // console.log(name)
+    // console.log(type)
+    // console.log(description)
+    // console.log(age)
   }
 
   onMapPress() {
@@ -119,45 +143,56 @@ class NewCat extends Component {
 
   render() {
     return (
-      <View style={{flex:1}}>
-        <View style={styles.container}>
-          <MapView
-            style={styles.map}
-            region={this.state.region}
-            onPress={(event) => this.onMapPress()}
-          >
+      <View style={styles.container}>
+        <MapView
+          style={styles.map}
+          region={this.state.region}
+          onPress={(event) => this.onMapPress()}
+        >
 
-          </MapView>
-          <View style={{flex:1}}>
-            <Card>
-              <CardSection>
-                <Input
-                  label="Name"
-                  placeholder="If known"
-                  onChangeText={this.onNameChange.bind(this)}
-                  value={this.props.name}
-                />
-                <Input
-                  label="Type"
-                  placeholder="Color or type"
-                  onChangeText={this.onTypeChange.bind(this)}
-                  value={this.props.type}
-                />
-                <Input
-                  label="Description"
-                  placeholder="A short note"
-                  onChangeText={this.onDescriptionChange.bind(this)}
-                  value={this.props.description}
-                />
-                <Input
-                  label="Age"
-                  placeholder="Estimation"
-                  onChangeText={this.onAgeChange.bind(this)}
-                  value={this.props.age}
-                />
-              </CardSection>
-            </Card>
-          </View>
+        </MapView>
+        <View style={styles.form}>
+          <Card>
+            <CardSection>
+              <Input
+                label="Name"
+                placeholder="If known"
+                onChangeText={this.onNameChange.bind(this)}
+                value={this.props.name}
+              />
+            </CardSection>
+            <CardSection>
+              <Input
+                label="Type"
+                placeholder="Color or type"
+                onChangeText={this.onTypeChange.bind(this)}
+                value={this.props.type}
+              />
+            </CardSection>
+            <CardSection>
+              <Input
+                label="Description"
+                placeholder="A short note"
+                onChangeText={this.onDescriptionChange.bind(this)}
+                value={this.props.description}
+              />
+            </CardSection>
+            <CardSection>
+              <Input
+                label="Age"
+                placeholder="Estimation"
+                onChangeText={this.onAgeChange.bind(this)}
+                value={this.props.age}
+              />
+            </CardSection>
+            <CardSection>
+              <Button
+                text="Meow!"
+                onPress={this.createCat.bind(this)}
+              >
+              </Button>
+            </CardSection>
+          </Card>
         </View>
       </View>
     );
@@ -167,62 +202,25 @@ class NewCat extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    width: width,
-    height: height,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // backgroundColor: '#F5FCFF',
+    // width: width,
+    // height: height,
   },
   map: {
     flex: 1,
-    width: width,
-    height: height,
   },
-  popup: {
-    position: 'absolute',
-    right: 0,
-    bottom: 0,
-    left: 0,
-    backgroundColor: '#fff',
-    height: 190,
-  },
-  avatarImageStyle: {
-    height: 150,
-    width: 150,
-  },
-  popupContainer: {
-    padding: 15,
-    flexDirection: 'column',
-  },
-  popupText1: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  popupText2: {
-    paddingTop: 5,
-    fontStyle: 'italic',
-  },
-  popupText3: {
-    paddingTop: 15,
-    fontSize: 12,
-    fontWeight: 'bold',
-  },
-  popupText4: {
-    paddingTop: 5,
-    fontSize: 15,
-  },
-  popupText5: {
-    padding: 10,
-    fontSize: 10,
-    fontWeight: 'bold',
-    alignSelf: 'center',
+  form: {
+    flex: 1,
   },
 });
 
-const mapStateToProps = ({ newCat }) => {
+const mapStateToProps = ({ newCat, auth }) => {
   const { name, type, description, age } = newCat;
+  const { user } = auth;
 
-  return { name, type, description, age };
+  return { user, name, type, description, age };
 }
 
 export default connect(mapStateToProps, {nameChanged, typeChanged, descriptionChanged, ageChanged})(NewCat);

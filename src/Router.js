@@ -10,22 +10,21 @@ import NewCat from './components/NewCat';
 const RouterComponent = () => {
   return (
     <Router sceneStyle={ styles.global }>
-      <Scene key="auth">
+      <Scene key="auth" initial>
         <Scene key="login" component={LoginForm} title="Login" initial />
         <Scene key="signup" component={SignupForm} title="Signup" />
       </Scene>
       <Scene key="test">
         <Scene key="testpage" component={TestPage} title="Login" initial />
       </Scene>
-      <Scene key="main" initial>
+      <Scene key="main">
         <Scene
           key="map"
           component={MainMap}
           title="PocketCats"
           onRight={() => Actions.new()}
-          rightTitle="+"
-          initial />
-        <Scene key="new" component={NewCat} title="Log Cat"  />
+          rightTitle="+" />
+        <Scene key="new" component={NewCat} title="Log Cat" />
       </Scene>
     </Router>
   )
