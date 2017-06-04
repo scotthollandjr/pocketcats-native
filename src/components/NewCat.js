@@ -41,7 +41,7 @@ let realm = new Realm({
       id:          { type: 'string', indexed: true },
       name:        { type: 'string', indexed: true },
       type:        { type: 'string', indexed: true },
-      location:    { type: 'string', indexed: true },
+      location:    'Coordinate',
       description: 'string',
       age:         'int',
       logged:      'date',
@@ -49,6 +49,12 @@ let realm = new Realm({
       gender:      'string',
       user:        { type: 'string', indexed: true },
       image:       'string'
+    }
+  }, {
+    name: 'Coordinate',
+    properties: {
+      latitude:  'float',
+      longitude: 'float',
     }
   }]
 });
@@ -95,16 +101,19 @@ class NewCat extends Component {
     };
   }
 
+
   createCat() {
     const date = new Date();
     const id = Utils.guid();
+    console.log(this.state.marker)
+    const coord = this.state.marker.coordinate;
 
     realm.write(() => {
       realm.create('Cat', {
         id:          id,
         name:        this.props.name,
         type:        this.props.type,
-        location:    this.props.location,
+        location:    {latitude: coord.latitude, longitude: coord.longitude},
         description: this.props.description,
         age:         0,
         logged:      date,
@@ -121,21 +130,21 @@ class NewCat extends Component {
     console.log("Cats: ", catsArray)
   }
 
-  onButtonPress() {
-    const { name, type, description, location, user } = this.props;
-    const date = new Date();
-    const id = Utils.guid();
-
-    console.log(user.uid)
-    console.log("date ", date)
-    console.log("id", id)
-    console.log("location", location)
-
-    // console.log(name)
-    // console.log(type)
-    // console.log(description)
-    // console.log(age)
-  }
+  // onButtonPress() {
+  //   const { name, type, description, location, user } = this.props;
+  //   const date = new Date();
+  //   const id = Utils.guid();
+  //
+  //   console.log(user.uid)
+  //   console.log("date ", date)
+  //   console.log("id", id)
+  //   console.log("location", location)
+  //
+  //   // console.log(name)
+  //   // console.log(type)
+  //   // console.log(description)
+  //   // console.log(age)
+  // }
 
   onMapPress(e) {
     this.setState({
@@ -144,10 +153,6 @@ class NewCat extends Component {
         key: id++,
       },
     });
-
-    const coords = e.nativeEvent.coordinate.latitude.toString() + "," + e.nativeEvent.coordinate.longitude.toString();
-    this.props.locationChanged(coords);
-    console.log("coords: ", coords)
   }
 
   render() {
@@ -189,7 +194,6 @@ class NewCat extends Component {
                 value={this.props.description}
               />
             </CardSection>
-
             <CardSection>
               <Button
                 text="Meow!"
@@ -207,11 +211,6 @@ class NewCat extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // backgroundColor: '#F5FCFF',
-    // width: width,
-    // height: height,
   },
   map: {
     flex: 1,
