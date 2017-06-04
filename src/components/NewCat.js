@@ -27,7 +27,7 @@ import CustomCallout from './CustomCallout';
 const ASPECT_RATIO = width / height;
 const LATITUDE = 45.526977;
 const LONGITUDE = -122.683028;
-const LATITUDE_DELTA = 0.0922;
+const LATITUDE_DELTA = 0.041;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 let id = 0;
 
@@ -72,19 +72,47 @@ class NewCat extends Component {
     this.props.descriptionChanged(text);
   }
 
-  // componentWillMount() {
-  //   navigator.geolocation.getCurrentPosition(
-  //     (position) => {
-  //       var initialPosition = JSON.stringify(position);
-  //       this.setState({initialPosition});
-  //     },
-  //     (error) => alert(error.message),
-  //     {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-  //   );
-  //   this.watchID = navigator.geolocation.watchPosition((position) => {
-  //     var lastPosition = JSON.stringify(position);
-  //     this.setState({lastPosition});
-  //   });
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        var initialPosition = JSON.stringify(position);
+        this.setState({
+          region: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA
+          },
+          marker: {
+            coordinate: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            },
+            key: id++,
+          },
+        });
+      },
+      (error) => alert(error.message),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
+
+    this.watchID = navigator.geolocation.watchPosition((position) => {
+      const newRegion = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA
+      }
+      // this.onRegionChange(newRegion);
+    });
+  }
+
+  componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.watchID);
+  }
+
+  // onRegionChange(region) {
+  //   this.setState({ region });
   // }
 
   constructor(props) {
@@ -92,12 +120,18 @@ class NewCat extends Component {
 
     this.state = {
       region: {
-        latitude: 45.526977,
-        longitude: -122.683028,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
+        latitude: 0.0,
+        longitude: 0.0,
+        latitudeDelta: 0.0,
+        longitudeDelta: 0.0,
       },
-      marker: {},
+      marker: {
+        coordinate: {
+          latitude: 0.0,
+          longitude: 0.0,
+        },
+        key: id++,
+      },
     };
   }
 
@@ -105,7 +139,6 @@ class NewCat extends Component {
   createCat() {
     const date = new Date();
     const id = Utils.guid();
-    console.log(this.state.marker)
     const coord = this.state.marker.coordinate;
 
     realm.write(() => {
@@ -130,22 +163,6 @@ class NewCat extends Component {
     console.log("Cats: ", catsArray)
   }
 
-  // onButtonPress() {
-  //   const { name, type, description, location, user } = this.props;
-  //   const date = new Date();
-  //   const id = Utils.guid();
-  //
-  //   console.log(user.uid)
-  //   console.log("date ", date)
-  //   console.log("id", id)
-  //   console.log("location", location)
-  //
-  //   // console.log(name)
-  //   // console.log(type)
-  //   // console.log(description)
-  //   // console.log(age)
-  // }
-
   onMapPress(e) {
     this.setState({
       marker: {
@@ -153,6 +170,7 @@ class NewCat extends Component {
         key: id++,
       },
     });
+    console.log("marker: ", this.state.marker)
   }
 
   render() {
