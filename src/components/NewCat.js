@@ -18,7 +18,7 @@ import {
   nameChanged,
   typeChanged,
   descriptionChanged,
-  ageChanged } from '../actions';
+  locationChanged } from '../actions';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 import Utils from '../Utils';
 import firebase from 'firebase';
@@ -29,6 +29,7 @@ const LATITUDE = 45.526977;
 const LONGITUDE = -122.683028;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+let id = 0;
 
 import Realm from 'realm';
 
@@ -65,10 +66,6 @@ class NewCat extends Component {
     this.props.descriptionChanged(text);
   }
 
-  onAgeChange(text) {
-    this.props.ageChanged(text);
-  }
-
   // componentWillMount() {
   //   navigator.geolocation.getCurrentPosition(
   //     (position) => {
@@ -94,6 +91,7 @@ class NewCat extends Component {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       },
+      marker: {},
     };
   }
 
@@ -106,13 +104,14 @@ class NewCat extends Component {
         id:          id,
         name:        this.props.name,
         type:        this.props.type,
-        location:    'null',
+        location:    this.props.location,
         description: this.props.description,
         age:         0,
         logged:      date,
         collar:      false,
         gender:      'null',
-        user:        this.props.user.uid,
+        // user:        this.props.user.uid,
+        user:        'G5PlSVLyzIQM8CKNZpSmI9ZMQpY2', //no log in
         image:       'null'
       });
     });
@@ -123,13 +122,14 @@ class NewCat extends Component {
   }
 
   onButtonPress() {
-    const { name, type, description, age, user } = this.props;
+    const { name, type, description, location, user } = this.props;
     const date = new Date();
     const id = Utils.guid();
 
     console.log(user.uid)
     console.log("date ", date)
     console.log("id", id)
+    console.log("location", location)
 
     // console.log(name)
     // console.log(type)
@@ -137,8 +137,17 @@ class NewCat extends Component {
     // console.log(age)
   }
 
-  onMapPress() {
-    return;
+  onMapPress(e) {
+    this.setState({
+      marker: {
+        coordinate: e.nativeEvent.coordinate,
+        key: id++,
+      },
+    });
+
+    const coords = e.nativeEvent.coordinate.latitude.toString() + "," + e.nativeEvent.coordinate.longitude.toString();
+    this.props.locationChanged(coords);
+    console.log("coords: ", coords)
   }
 
   render() {
@@ -147,9 +156,12 @@ class NewCat extends Component {
         <MapView
           style={styles.map}
           region={this.state.region}
-          onPress={(event) => this.onMapPress()}
-        >
-
+          onPress={(event) => this.onMapPress(event)}
+          >
+          <MapView.Marker
+            key={this.state.marker.key}
+            coordinate={this.state.marker.coordinate}
+          />
         </MapView>
         <View style={styles.form}>
           <Card>
@@ -177,14 +189,7 @@ class NewCat extends Component {
                 value={this.props.description}
               />
             </CardSection>
-            <CardSection>
-              <Input
-                label="Age"
-                placeholder="Estimation"
-                onChangeText={this.onAgeChange.bind(this)}
-                value={this.props.age}
-              />
-            </CardSection>
+
             <CardSection>
               <Button
                 text="Meow!"
@@ -217,10 +222,10 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({ newCat, auth }) => {
-  const { name, type, description, age } = newCat;
+  const { name, type, description, location } = newCat;
   const { user } = auth;
 
-  return { user, name, type, description, age };
+  return { user, name, type, description, location };
 }
 
-export default connect(mapStateToProps, {nameChanged, typeChanged, descriptionChanged, ageChanged})(NewCat);
+export default connect(mapStateToProps, {nameChanged, typeChanged, descriptionChanged, locationChanged})(NewCat);

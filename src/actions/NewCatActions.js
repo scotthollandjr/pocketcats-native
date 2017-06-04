@@ -4,7 +4,7 @@ import {
   NAME_CHANGED,
   TYPE_CHANGED,
   DESCRIPTION_CHANGED,
-  AGE_CHANGED,
+  LOCATION_CHANGED,
 } from './types';
 
 export const nameChanged = (text) => {
@@ -28,9 +28,9 @@ export const descriptionChanged = (text) => {
   };
 };
 
-export const ageChanged = (text) => {
+export const locationChanged = (text) => {
   return {
-    type: AGE_CHANGED,
+    type: LOCATION_CHANGED,
     payload: text
   };
 };

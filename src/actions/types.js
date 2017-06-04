@@ -10,4 +10,4 @@ export const SELECT_CAT = 'select_cat';
 export const NAME_CHANGED = 'name_changed';
 export const TYPE_CHANGED = 'type_changed';
 export const DESCRIPTION_CHANGED = 'description_changed';
-export const AGE_CHANGED = 'age_changed';
+export const LOCATION_CHANGED = 'location_changed';

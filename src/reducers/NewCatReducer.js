@@ -2,14 +2,14 @@ import {
   NAME_CHANGED,
   TYPE_CHANGED,
   DESCRIPTION_CHANGED,
-  AGE_CHANGED,
+  LOCATION_CHANGED,
 } from '../actions/types';
 
 const INITIAL_STATE = {
   name: '',
   type: '',
   description: '',
-  age: null,
+  location: '',
   error: '',
 };
 
@@ -21,8 +21,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, type: action.payload };
     case DESCRIPTION_CHANGED:
       return { ...state, description: action.payload };
-    case AGE_CHANGED:
-      return { ...state, age: action.payload };
+    case LOCATION_CHANGED:
+      return { ...state, location: action.payload };
     default:
       return state;
   }
