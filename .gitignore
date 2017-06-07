@@ -39,10 +39,7 @@ yarn-error.log
 # BUCK
 buck-out/
 \.buckd/
-android/app/libs
 *.keystore
-
-config.js
 
 # fastlane
 #
@@ -54,3 +51,5 @@ config.js
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
+
+config.js

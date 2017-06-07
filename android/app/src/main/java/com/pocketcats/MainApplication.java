@@ -1,12 +1,10 @@
 package com.pocketcats;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.facebook.react.ReactApplication;
 import io.realm.react.RealmReactPackage;
 import com.airbnb.android.react.maps.MapsPackage;
-import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;

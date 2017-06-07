@@ -35,10 +35,10 @@
 		2DCD954D1E0B4F2C00145EB5 /* pocketcatsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* pocketcatsTests.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		07BD78A9D27741A6B032CCC9 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F3B579A2C9E4DF6A3010699 /* libAirMaps.a */; };
-		4C5C96C69AA842CEB70D2C3E /* libRealmReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FCE4E69E194DCAA7CA26F3 /* libRealmReact.a */; };
-		45AF31E829D748D19BB06ECC /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AE5895BEDA445B69E08F033 /* libc++.tbd */; };
-		DFD7CF3CCA3343AD819815D8 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CADF7F97B6A34F7C8CDE7404 /* libz.tbd */; };
+		64DBEFB68564410B9204BBEE /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 555D85A9793E42779D073F18 /* libAirMaps.a */; };
+		DD2438B285964069AF17A8DE /* libRealmReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF710D8F39CF4042B49CAEA9 /* libRealmReact.a */; };
+		4AD5D196152145B5BF2F3E21 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C96CF4D77243492FBAC041D2 /* libc++.tbd */; };
+		E7297A9955B248B8B556C222 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F10B1E7B4A674B419FDCA538 /* libz.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -258,12 +258,12 @@
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		00900C5CFF9249EE9F317418 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; name = "AirMaps.xcodeproj"; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		0F3B579A2C9E4DF6A3010699 /* libAirMaps.a */ = {isa = PBXFileReference; name = "libAirMaps.a"; path = "libAirMaps.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		5DE000F80BD447539B4A60D8 /* RealmReact.xcodeproj */ = {isa = PBXFileReference; name = "RealmReact.xcodeproj"; path = "../node_modules/realm/react-native/ios/RealmReact.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		98FCE4E69E194DCAA7CA26F3 /* libRealmReact.a */ = {isa = PBXFileReference; name = "libRealmReact.a"; path = "libRealmReact.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		2AE5895BEDA445B69E08F033 /* libc++.tbd */ = {isa = PBXFileReference; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
-		CADF7F97B6A34F7C8CDE7404 /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		52560924450F46BCA76711F4 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; name = "AirMaps.xcodeproj"; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		555D85A9793E42779D073F18 /* libAirMaps.a */ = {isa = PBXFileReference; name = "libAirMaps.a"; path = "libAirMaps.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		FCB6CEC85D7E49B09D652A5B /* RealmReact.xcodeproj */ = {isa = PBXFileReference; name = "RealmReact.xcodeproj"; path = "../node_modules/realm/react-native/ios/RealmReact.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		EF710D8F39CF4042B49CAEA9 /* libRealmReact.a */ = {isa = PBXFileReference; name = "libRealmReact.a"; path = "libRealmReact.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		C96CF4D77243492FBAC041D2 /* libc++.tbd */ = {isa = PBXFileReference; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		F10B1E7B4A674B419FDCA538 /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,10 +290,10 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				07BD78A9D27741A6B032CCC9 /* libAirMaps.a in Frameworks */,
-				4C5C96C69AA842CEB70D2C3E /* libRealmReact.a in Frameworks */,
-				45AF31E829D748D19BB06ECC /* libc++.tbd in Frameworks */,
-				DFD7CF3CCA3343AD819815D8 /* libz.tbd in Frameworks */,
+				64DBEFB68564410B9204BBEE /* libAirMaps.a in Frameworks */,
+				DD2438B285964069AF17A8DE /* libRealmReact.a in Frameworks */,
+				4AD5D196152145B5BF2F3E21 /* libc++.tbd in Frameworks */,
+				E7297A9955B248B8B556C222 /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,8 +460,8 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
-				00900C5CFF9249EE9F317418 /* AirMaps.xcodeproj */,
-				5DE000F80BD447539B4A60D8 /* RealmReact.xcodeproj */,
+				52560924450F46BCA76711F4 /* AirMaps.xcodeproj */,
+				FCB6CEC85D7E49B09D652A5B /* RealmReact.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -482,7 +482,7 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* pocketcatsTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
-				BFFA54BF45114E00819A818D /* Frameworks */,
+				E83C310837D64FA4B3505B1B /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -499,15 +499,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BFFA54BF45114E00819A818D /* Frameworks */ = {
-			isa = PBXGroup;
+		E83C310837D64FA4B3505B1B /* Frameworks */ = {
+			isa = "PBXGroup";
 			children = (
-				2AE5895BEDA445B69E08F033 /* libc++.tbd */,
-				CADF7F97B6A34F7C8CDE7404 /* libz.tbd */,
+				C96CF4D77243492FBAC041D2 /* libc++.tbd */,
+				F10B1E7B4A674B419FDCA538 /* libz.tbd */,
 			);
 			name = Frameworks;
-			path = "";
 			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -1003,6 +1003,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/realm/src/**",
+				);
 			};
 			name = Debug;
 		};
@@ -1025,6 +1030,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/realm/src/**",
+				);
 			};
 			name = Release;
 		};
@@ -1043,6 +1053,11 @@
 				);
 				PRODUCT_NAME = pocketcats;
 				VERSIONING_SYSTEM = "apple-generic";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/realm/src/**",
+				);
 			};
 			name = Debug;
 		};
@@ -1060,6 +1075,11 @@
 				);
 				PRODUCT_NAME = pocketcats;
 				VERSIONING_SYSTEM = "apple-generic";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/realm/src/**",
+				);
 			};
 			name = Release;
 		};
@@ -1091,6 +1111,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/realm/src/**",
+				);
 			};
 			name = Debug;
 		};
@@ -1121,6 +1146,11 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/realm/src/**",
 				);
 			};
 			name = Release;
