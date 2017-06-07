@@ -15,10 +15,18 @@ import { Actions } from 'react-native-router-flux';
 var {height, width} = Dimensions.get('window');
 import MapView, { Marker } from 'react-native-maps';
 import {
-  nameChanged,
-  typeChanged,
+  idChanged,
+  ageChanged,
   descriptionChanged,
-  locationChanged } from '../actions';
+  genderChanged,
+  imageChanged,
+  locationChanged,
+  loggedChanged,
+  nameChanged,
+  taggedChanged,
+  typeChanged,
+  userChanged,
+  addCat } from '../actions';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 import Utils from '../Utils';
 import firebase from 'firebase';
@@ -32,32 +40,6 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 let id = 0;
 
 import Realm from 'realm';
-
-let realm = new Realm({
-  schema: [{
-    name: 'Cat',
-    primaryKey: 'id',
-    properties: {
-      id:          { type: 'string', indexed: true },
-      name:        { type: 'string', indexed: true },
-      type:        { type: 'string', indexed: true },
-      location:    'Coordinate',
-      description: 'string',
-      age:         'int',
-      logged:      'date',
-      collar:      'bool',
-      gender:      'string',
-      user:        { type: 'string', indexed: true },
-      image:       'string'
-    }
-  }, {
-    name: 'Coordinate',
-    properties: {
-      latitude:  'float',
-      longitude: 'float',
-    }
-  }]
-});
 
 class NewCat extends Component {
   onNameChange(text) {
@@ -103,17 +85,12 @@ class NewCat extends Component {
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA
       }
-      // this.onRegionChange(newRegion);
     });
   }
 
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchID);
   }
-
-  // onRegionChange(region) {
-  //   this.setState({ region });
-  // }
 
   constructor(props) {
     super(props);
@@ -135,32 +112,21 @@ class NewCat extends Component {
     };
   }
 
-
-  createCat() {
-    const date = new Date();
+  onButtonSubmit() {
     const id = Utils.guid();
-    const coord = this.state.marker.coordinate;
+    const age = 0;
+    const description = this.props.description;
+    const gender = 'null';
+    const image = 'null';
+    const location = this.state.marker.coordinate;
+    const logged = new Date();
+    const name = this.props.name;
+    const tagged = false;
+    const type = this.props.type;
+    // const user = this.props.user.uid;
+    const user = "G5PlSVLyzIQM8CKNZpSmI9ZMQpY2";
 
-    realm.write(() => {
-      realm.create('Cat', {
-        id:          id,
-        name:        this.props.name,
-        type:        this.props.type,
-        location:    {latitude: coord.latitude, longitude: coord.longitude},
-        description: this.props.description,
-        age:         0,
-        logged:      date,
-        collar:      false,
-        gender:      'null',
-        // user:        this.props.user.uid,
-        user:        'G5PlSVLyzIQM8CKNZpSmI9ZMQpY2', //no log in
-        image:       'null'
-      });
-    });
-
-    let cats = realm.objects('Cat');
-    let catsArray = cats.map(x => Object.assign({}, x));
-    console.log("Cats: ", catsArray)
+    this.props.addCat(id, age, description, gender, image, location, logged, name, tagged, type, user);
   }
 
   onMapPress(e) {
@@ -215,7 +181,7 @@ class NewCat extends Component {
             <CardSection>
               <Button
                 text="Meow!"
-                onPress={this.createCat.bind(this)}
+                onPress={this.onButtonSubmit.bind(this)}
               >
               </Button>
             </CardSection>
@@ -239,10 +205,10 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({ newCat, auth }) => {
-  const { name, type, description, location } = newCat;
+  const { id, age, description, gender, image, location, logged, name, tagged, type } = newCat;
   const { user } = auth;
 
-  return { user, name, type, description, location };
+  return { id, age, description, gender, image, location, logged, name, tagged, type };
 }
 
-export default connect(mapStateToProps, {nameChanged, typeChanged, descriptionChanged, locationChanged})(NewCat);
+export default connect(mapStateToProps, {idChanged, ageChanged, descriptionChanged, genderChanged, imageChanged, locationChanged, loggedChanged, nameChanged, taggedChanged, typeChanged, userChanged, addCat})(NewCat);

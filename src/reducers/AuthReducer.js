@@ -44,7 +44,8 @@ export default (state = INITIAL_STATE, action) => {
         password: '',
         conPassword: '',
         loading: false,
-        error: action.payload };
+        error: action.payload
+      };
     default:
       return state;
   }
