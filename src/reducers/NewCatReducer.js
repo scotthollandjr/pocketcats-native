@@ -1,5 +1,4 @@
 import {
-  ID_CHANGED,
   AGE_CHANGED,
   DESCRIPTION_CHANGED,
   GENDER_CHANGED,
@@ -9,7 +8,6 @@ import {
   NAME_CHANGED,
   TAGGED_CHANGED,
   TYPE_CHANGED,
-  USER_CHANGED,
   ADD_CAT,
 } from '../actions/types';
 
@@ -30,8 +28,6 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch(action.type) {
-    case ID_CHANGED:
-      return { ...state, id: action.payload };
     case AGE_CHANGED:
       return { ...state, age: action.payload };
     case DESCRIPTION_CHANGED:
@@ -50,8 +46,6 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, tagged: action.payload };
     case TYPE_CHANGED:
       return { ...state, type: action.payload };
-    case USER_CHANGED:
-      return { ...state, user: action.payload };
     case ADD_CAT:
       return { ...state, ...INITIAL_STATE };
     default:

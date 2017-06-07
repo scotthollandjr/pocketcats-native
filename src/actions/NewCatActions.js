@@ -1,7 +1,6 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import {
-  ID_CHANGED,
   AGE_CHANGED,
   DESCRIPTION_CHANGED,
   GENDER_CHANGED,
@@ -11,17 +10,9 @@ import {
   NAME_CHANGED,
   TAGGED_CHANGED,
   TYPE_CHANGED,
-  USER_CHANGED,
   ADD_CAT,
 } from './types';
 import { realm } from '../components/common';
-
-export const idChanged = (text) => {
-  return {
-    type: ID_CHANGED,
-    payload: text
-  };
-};
 
 export const ageChanged = (text) => {
   return {
@@ -38,6 +29,7 @@ export const descriptionChanged = (text) => {
 };
 
 export const genderChanged = (text) => {
+  console.log("gender action", text)
   return {
     type: GENDER_CHANGED,
     payload: text
@@ -73,6 +65,7 @@ export const nameChanged = (text) => {
 };
 
 export const taggedChanged = (text) => {
+  console.log("tagged action", text)
   return {
     type: TAGGED_CHANGED,
     payload: text
@@ -82,13 +75,6 @@ export const taggedChanged = (text) => {
 export const typeChanged = (text) => {
   return {
     type: TYPE_CHANGED,
-    payload: text
-  };
-};
-
-export const userChanged = (text) => {
-  return {
-    type: USER_CHANGED,
     payload: text
   };
 };

@@ -9,6 +9,7 @@
   "dependencies": {
     "firebase": "4.1.1",
     "lodash": "4.17.4",
+    "radio-button-react-native": "^1.1.6",
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.3",
     "react-native-maps": "0.15.2",
