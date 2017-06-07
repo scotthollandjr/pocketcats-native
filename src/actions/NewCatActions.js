@@ -29,7 +29,6 @@ export const descriptionChanged = (text) => {
 };
 
 export const genderChanged = (text) => {
-  console.log("gender action", text)
   return {
     type: GENDER_CHANGED,
     payload: text
@@ -65,7 +64,6 @@ export const nameChanged = (text) => {
 };
 
 export const taggedChanged = (text) => {
-  console.log("tagged action", text)
   return {
     type: TAGGED_CHANGED,
     payload: text

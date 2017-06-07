@@ -29,6 +29,7 @@ import { Card, CardSection, Input, Button, Spinner, realm } from './common';
 import Utils from '../Utils';
 import firebase from 'firebase';
 import RadioButton from 'radio-button-react-native';
+import ModalDropdown from 'react-native-modal-dropdown';
 
 import CustomCallout from './CustomCallout';
 const ASPECT_RATIO = width / height;
@@ -37,6 +38,8 @@ const LONGITUDE = -122.683028;
 const LATITUDE_DELTA = 0.041;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 let id = 0;
+
+const catTypes = ['Black', 'Calico', 'Grey / Blue', 'Maine Coone', 'Orange', 'Point', 'Siamese', 'Tabby', 'Tortoiseshell', 'Tuxedo', 'White'];
 
 class NewCat extends Component {
   onAgeChange(text) {
@@ -49,7 +52,6 @@ class NewCat extends Component {
   }
 
   onGenderChange(text) {
-    console.log("gender:", text)
     this.props.genderChanged(text);
   }
 
@@ -66,12 +68,12 @@ class NewCat extends Component {
   }
 
   onTaggedChange(text) {
-    console.log("tagged:", text)
     this.props.taggedChanged(text);
   }
 
-  onTypeChange(text) {
-    this.props.typeChanged(text);
+  onTypeChange(index) {
+    const type = catTypes[index];
+    this.props.typeChanged(type);
   }
 
   componentDidMount() {
@@ -183,6 +185,15 @@ class NewCat extends Component {
               />
             </CardSection>
             <CardSection>
+              <ModalDropdown
+                textStyle={{fontSize: 18, paddingLeft: 20}}
+                dropdownStyle={{width: 350}}
+                dropdownTextStyle={{fontSize: 18, paddingLeft: 20}}
+                defaultValue={"Color / Type"}
+                onSelect={this.onTypeChange.bind(this)}
+                options={catTypes} />
+            </CardSection>
+            <CardSection>
               <Input
                 label="Description"
                 placeholder="A short note"
@@ -190,7 +201,7 @@ class NewCat extends Component {
                 value={this.props.description}
               />
             </CardSection>
-            <CardSection>
+            <CardSection style={{flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20}}>
               <RadioButton currentValue={this.props.gender} value={'male'} onPress={this.onGenderChange.bind(this)}>
                 <Text>Male</Text>
               </RadioButton>
@@ -201,21 +212,13 @@ class NewCat extends Component {
                 <Text>Not Sure</Text>
               </RadioButton>
             </CardSection>
-            <CardSection>
+            <CardSection style={{flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 20, paddingRight: 20}}>
               <RadioButton currentValue={this.props.tagged} value={true} onPress={this.onTaggedChange.bind(this)}>
                 <Text>Tagged</Text>
               </RadioButton>
               <RadioButton currentValue={this.props.tagged} value={false} onPress={this.onTaggedChange.bind(this)}>
                 <Text>Not Tagged</Text>
               </RadioButton>
-            </CardSection>
-            <CardSection>
-              <Input
-                label="Type"
-                placeholder="dropdown of types"
-                onChangeText={this.onTypeChange.bind(this)}
-                value={this.props.type}
-              />
             </CardSection>
             <CardSection>
               <Button
@@ -230,6 +233,7 @@ class NewCat extends Component {
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
