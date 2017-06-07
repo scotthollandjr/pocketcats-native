@@ -27,7 +27,7 @@ import {
   typeChanged,
   userChanged,
   addCat } from '../actions';
-import { Card, CardSection, Input, Button, Spinner } from './common';
+import { Card, CardSection, Input, Button, Spinner, realm } from './common';
 import Utils from '../Utils';
 import firebase from 'firebase';
 
@@ -38,8 +38,6 @@ const LONGITUDE = -122.683028;
 const LATITUDE_DELTA = 0.041;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 let id = 0;
-
-import Realm from 'realm';
 
 class NewCat extends Component {
   onNameChange(text) {

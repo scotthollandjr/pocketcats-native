@@ -16,6 +16,7 @@ import { Actions } from 'react-native-router-flux';
 import { selectCat } from '../actions';
 var {height, width} = Dimensions.get('window');
 import MapView, { Marker } from 'react-native-maps';
+import { realm } from './common';
 
 import CustomCallout from './CustomCallout';
 const ASPECT_RATIO = width / height;
@@ -25,10 +26,12 @@ const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 let id = 0;
-
 let popupHidden = true;
 
-let cats = [
+let cats = realm.objects('Cat');
+let catsArray = cats.map(x => Object.assign({}, x));
+
+let fakeCats = [
   {
     id: 0,
     name: "Appa",
