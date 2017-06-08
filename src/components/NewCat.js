@@ -186,9 +186,9 @@ class NewCat extends Component {
             </CardSection>
             <CardSection>
               <ModalDropdown
-                textStyle={{fontSize: 18, paddingLeft: 20}}
+                textStyle={{fontSize: 18, paddingLeft: 10, paddingRight: 10}}
                 dropdownStyle={{width: 350}}
-                dropdownTextStyle={{fontSize: 18, paddingLeft: 20}}
+                dropdownTextStyle={{fontSize: 18, paddingLeft: 10, paddingRight: 10}}
                 defaultValue={"Color / Type"}
                 onSelect={this.onTypeChange.bind(this)}
                 options={catTypes} />
@@ -233,7 +233,6 @@ class NewCat extends Component {
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {

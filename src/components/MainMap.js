@@ -16,7 +16,7 @@ import { Actions } from 'react-native-router-flux';
 import { selectCat } from '../actions';
 var {height, width} = Dimensions.get('window');
 import MapView, { Marker } from 'react-native-maps';
-import { realm } from './common';
+import { realm, Footer } from './common';
 
 import CustomCallout from './CustomCallout';
 const ASPECT_RATIO = width / height;
@@ -168,6 +168,7 @@ class MainMap extends Component {
         >
           {this.popupRender()}
         </Animated.View>
+        <Footer />
       </View>
     );
   }

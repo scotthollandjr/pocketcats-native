@@ -23,8 +23,9 @@ const RouterComponent = () => {
           component={MainMap}
           title="PocketCats"
           onRight={() => Actions.new()}
-          rightTitle="+" />
-        <Scene key="new" component={NewCat} title="Log Cat" initial />
+          rightTitle="+"
+          initial />
+        <Scene key="new" component={NewCat} title="Log Cat" />
       </Scene>
     </Router>
   )
